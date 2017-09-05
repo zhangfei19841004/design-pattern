@@ -1,4 +1,4 @@
-package com.zf.demo;
+package com.zf.singleton;
 
 /**
  * Created by zhangfei on 2017/8/11/011.
