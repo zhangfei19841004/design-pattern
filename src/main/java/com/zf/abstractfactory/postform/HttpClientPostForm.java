@@ -1,6 +1,7 @@
-package com.zf.simplefactory.impl;
+package com.zf.abstractfactory.postform;
 
-import com.zf.simplefactory.HttpClientAbs;
+import com.zf.abstractfactory.abs.HttpFactoryAbs;
+import com.zf.abstractfactory.abs.HttpPostFormAbs;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -18,22 +19,27 @@ import java.util.Map;
 /**
  * Created by zhangfei on 2017/9/5/005.
  */
-public class HttpClientPostForm extends HttpClientAbs {
+public class HttpClientPostForm extends HttpPostFormAbs {
 
     private Map<String, String> params;
 
+    public HttpClientPostForm(HttpFactoryAbs factory) {
+        super(factory);
+    }
+
     @Override
     public String execute(String url) {
+        factory.httpClientInitial();
         HttpPost httpPost = null;
         try {
             httpPost = new HttpPost(url);
-            httpPost.setConfig(requestConfig);
+            httpPost.setConfig(factory.getRequestConfig());
             List<NameValuePair> ps = new ArrayList<NameValuePair>();
             for (String pKey : params.keySet()) {
                 ps.add(new BasicNameValuePair(pKey, params.get(pKey)));
             }
             httpPost.setEntity(new UrlEncodedFormEntity(ps));
-            CloseableHttpResponse response = httpClient.execute(httpPost);
+            CloseableHttpResponse response = factory.getHttpClient().execute(httpPost);
             HttpEntity httpEntity = response.getEntity();
             return EntityUtils.toString(httpEntity,"utf-8");
         } catch (ClientProtocolException e) {
@@ -44,13 +50,13 @@ public class HttpClientPostForm extends HttpClientAbs {
             if(httpPost!=null){
                 httpPost.releaseConnection();
             }
-            this.close();
+            factory.close();
         }
         return null;
     }
 
     @Override
-    public <T> HttpClientAbs setParams(T t) {
+    public <T> HttpPostFormAbs setParams(T t) {
         params = (Map<String, String>) t;
         return this;
     }
