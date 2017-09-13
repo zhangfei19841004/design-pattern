@@ -11,6 +11,12 @@ public class TestDemo {
         Scanner in = new Scanner(System.in);
         System.out.println(in.nextLine());
         in.close();
+        TestDemo t = new TestDemo();
+        try {
+            t.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
 }

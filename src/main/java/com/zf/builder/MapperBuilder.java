@@ -37,6 +37,9 @@ public class MapperBuilder {
 
         Map<Integer, Integer> map1 = MapperBuilder.<Integer, Integer>getBuilder().put(1, 1).put(2, 2).build();
         System.out.println(map1);
+        StringBuilder sb = new StringBuilder();
+        sb.append("a").append("b").append("c").append("d");
+
     }
 
 }
