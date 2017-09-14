@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by zhangfei on 2017/9/13/013.
  */
-public class Prototype implements Cloneable{
+public abstract class Prototype implements Cloneable{
 
     private List<String> list;
 

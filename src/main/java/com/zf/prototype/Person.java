@@ -24,6 +24,7 @@ public class Person extends Prototype {
         List<String> list = new ArrayList<String>();
         list.add("a");
         pi.setList(list);
+        "a".hashCode();
         System.out.println(pi.hashCode());
         System.out.println(pi.getList().hashCode());
         Person pic = (Person) pi.clone();
@@ -32,6 +33,5 @@ public class Person extends Prototype {
         System.out.println(pic.getList().hashCode());
         System.out.println(pi.getList()==pic.getList());
     }
-
 
 }
